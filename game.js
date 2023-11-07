@@ -3,9 +3,10 @@ console.log('hello world form game');
 
 const question = document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
-const questionCounterText = document.getElementById('questionCounter');
+const progresstext = document.getElementById('progresstext');
 const scoreText = document.getElementById('score');
-console.log(questionCounterText);
+console.log(progresstext);
+const progressBarfull = document.getElementById('progressBarfull');
 
 let currentQuestion = {};
 let acceeptingAnswers = false;
@@ -76,7 +77,10 @@ const getNewQuestion = () => {
     return window.location.assign('/end.html');
   }
   questionCounter++;
-  questionCounterText.innerText = `${questionCounter}/${MAX_QUESTIONS}`;
+  progresstext.innerText = ` Question ${questionCounter}/${MAX_QUESTIONS}`;
+  progressBarfull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+  // console.log((questionCounter / MAX_QUESTIONS) * 100);
+
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
